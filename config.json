@@ -1,0 +1,14 @@
+{
+    "mistifly": {
+        "rq": {
+            "AccountNumber": "MCN000289",
+            "Password": "TRAE2017_xml",
+            "UserName": "TRAEXML",
+            "url": "http://onepointdemo.myfarebox.com/V2/OnePoint.svc?wsdl"
+        }
+    },
+    "travelfusion": {
+        "apiEndpoint": "https://api.travelfusion.com",
+        "xmlLoginId": "2OJBM9GHGS97N0E5"
+    }
+}
