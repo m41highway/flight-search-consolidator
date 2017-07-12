@@ -1,0 +1,31 @@
+{
+  "name": "flight-search-consolidator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m41highway/flight-search-consolidator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m41highway/flight-search-consolidator/issues"
+  },
+  "homepage": "https://github.com/m41highway/flight-search-consolidator#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "httpreq": "^0.4.24",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.0.1",
+    "koa-router": "^7.2.1",
+    "newline-remove": "^1.0.2",
+    "node-fetch": "^1.7.1",
+    "soap": "^0.19.2",
+    "xml2json": "^0.11.0"
+  }
+}
