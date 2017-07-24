@@ -34,9 +34,59 @@ const search = async function (departDate, returnDate, origin, destination, cabi
 
     console.log('----- Step 3": Low Fare Search -----');
     console.log(options);
-    let result = await mistiflyProxy.airLowFareSearchPromise(mistiflyClient, mistiflySession.CreateSessionResult.SessionId, options);
+    let res = await mistiflyProxy.airLowFareSearchPromise(mistiflyClient, mistiflySession.CreateSessionResult.SessionId, options);
 
-    return result;
+    if (!res.AirLowFareSearchResult) console.log('Fail to connect to API!');
+
+    if(res.AirLowFareSearchResult.Errors) {
+        console.log(res.AirLowFareSearchResult.Errors);
+    }
+
+
+    if (res.AirLowFareSearchResult.PricedItineraries) {
+        let fareList = res.AirLowFareSearchResult.PricedItineraries.PricedItinerary;
+
+        console.log(fareList);
+        console.log('--------------------------------------');
+
+        let simplifiedList = fareList.map(function(element){
+            return {
+                currency: element.AirItineraryPricingInfo.ItinTotalFare.TotalFare.CurrencyCode,
+                total: element.AirItineraryPricingInfo.ItinTotalFare.TotalFare.Amount,
+                isPassportMandatory: element.IsPassportMandatory,
+                ticketType: element.TicketType,
+                fareSourceCode: element.AirItineraryPricingInfo.FareSourceCode,
+                segments: element.OriginDestinationOptions.OriginDestinationOption,
+            }
+        })
+
+        simplifiedList.forEach(function(s){
+            console.log('=======================================');
+            // console.log(s.fareSourceCode);
+
+            let summaries = [];
+
+            s.segments.forEach(function(seg){
+                // console.log(seg);
+                let s = seg.FlightSegments.FlightSegment;
+
+                // console.log(seg.FlightSegments.FlightSegment.DepartureAirportLocationCode);
+                // console.log(seg.FlightSegments.FlightSegment.ArrivalAirportLocationCode);
+                // console.log(seg.FlightSegments.FlightSegment.DepartureDateTime);
+                // console.log(seg.FlightSegments.FlightSegment.ArrivalDateTime);
+                // console.log(seg.FlightSegments.FlightSegment.OperatingAirline);
+                // console.log(seg.FlightSegments.FlightSegment.CabinClassCode);
+
+                let summary = `${s.DepartureAirportLocationCode} -> ${s.ArrivalAirportLocationCode} by ${s.OperatingAirline.Code} ${s.OperatingAirline.FlightNumber} (${s.OperatingAirline.Equipment}) ${s.DepartureDateTime} -> ${s.ArrivalDateTime}`;
+                summaries.push(summary);
+                console.log(summary);
+            })
+            s.summaries = summaries;
+            // console.log(`${s.totalFare.CurrencyCode} ${s.totalFare.Amount}`);
+            console.log(`${s.currency} ${s.totol}`);
+        })
+        return simplifiedList;
+    }
 }
 
 module.exports = {
