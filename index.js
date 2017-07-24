@@ -33,6 +33,10 @@ router.get('/', async function (ctx){
 // 	  "departDate": "2017-08-15",
 // 	  "returnDate": "2017-08-19"
 // }
+// to-do:
+// 1. Passenge Type, qty
+// 2. cabin perfer
+// 3. max stop
 // ----------------------------------------------------
 router.post('/flights/search', async function (ctx){
 
