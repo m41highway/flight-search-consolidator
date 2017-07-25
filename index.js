@@ -5,6 +5,7 @@ const bodyParser = require('koa-bodyparser');
 const fetch = require('node-fetch');
 
 const mistifly = require('./flights/search-mystifly');
+const travelfusion = require('./flights/search-travelfusion')
 
 
 const app = new Koa();
@@ -50,8 +51,10 @@ router.post('/flights/search', async function (ctx){
 
     // let result = await Promise.all([ mystiflySearch(departDate, returnDate, origin, destination, cabinType) ])
 
-    let result = await Promise.all([ mistifly.search(departDate, returnDate, origin, destination, cabinType) ])
-
+    let result = await Promise.all([
+        mistifly.search(departDate, returnDate, origin, destination, cabinType),
+        travelfusion.search()
+    ])
 
     ctx.body = result;
 });
