@@ -8,7 +8,9 @@
         }
     },
     "travelfusion": {
-        "apiEndpoint": "https://api.travelfusion.com",
-        "xmlLoginId": "2OJBM9GHGS97N0E5"
+        "flights": {
+            "apiEndpoint": "https://api.travelfusion.com",
+            "xmlLoginId": "2OJBM9GHGS97N0E5"
+        }
     }
 }
