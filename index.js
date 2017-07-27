@@ -48,7 +48,7 @@ router.post('/flights/search', async function (ctx){
     const cabinType = ctx.request.body.cabinType;
 
     let result = await Promise.all([
-        mistifly.search(departDate, returnDate, origin, destination, cabinType),
+        // mistifly.search(departDate, returnDate, origin, destination, cabinType),
         travelfusion.search(departDate, returnDate, origin, destination)
     ])
 
